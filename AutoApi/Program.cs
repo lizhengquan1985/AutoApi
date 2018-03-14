@@ -11,7 +11,21 @@ namespace AutoApi
     {
         static void Main(string[] args)
         {
-            WebApp.Start<Startup>("http://127.0.0.1:7878");
+            StartOptions options = new StartOptions();
+            options.Urls.Add("http://localhost:4004");
+            options.Urls.Add("http://127.0.0.1:4004");
+            options.Urls.Add(string.Format("http://{0}:4004", Environment.MachineName));
+            options.Urls.Add("http://+:4004");
+            options.Urls.Add("http://localhost:80");
+            options.Urls.Add("http://127.0.0.1:80");
+            options.Urls.Add(string.Format("http://{0}:80", Environment.MachineName));
+            options.Urls.Add("http://+:80");
+            WebApp.Start<Startup>(options);
+
+            while (true)
+            {
+                Console.ReadLine();
+            }
         }
     }
 }

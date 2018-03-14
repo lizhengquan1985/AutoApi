@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpDapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace AutoApi.Dao
 {
     public class BaseDao : IBaseDao
     {
+        public IDapperConnection Database { get; set; }
     }
 }

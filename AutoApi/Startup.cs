@@ -2,6 +2,7 @@
 using AutoApi.Dao;
 using Autofac;
 using Autofac.Integration.WebApi;
+using Beginor.Owin.StaticFile;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -46,10 +47,10 @@ namespace AutoApi
                 "DefaultApi",
                 "api/{controller}/{id}",
                 new { id = RouteParameter.Optional });
-            config.Routes.MapHttpRoute(
-                "DefaultActionApi",
-                "{controller}/{action}/{id}",
-                new { id = RouteParameter.Optional });
+            //config.Routes.MapHttpRoute(
+            //    "DefaultActionApi",
+            //    "{controller}/{action}/{id}",
+            //    new { id = RouteParameter.Optional });
 
             var builder = new ContainerBuilder();
             // Register Web API controller in executing assembly.
@@ -66,7 +67,7 @@ namespace AutoApi
             }).InstancePerRequest();
 
             //注册数据库对象
-            builder.Register<IDapperConnection>(ctx => new DapperConnection(new MySqlConnection(ConfigurationManager.ConnectionStrings["mysql"].ToString()))).InstancePerRequest();
+            builder.Register<IDapperConnection>(ctx => new DapperConnection(new MySqlConnection("server=localhost;port=3306;user id=root; password=lyx123456; database=studyplan; pooling=true; charset=utf8mb4"))).InstancePerRequest();
 
             // Create and assign a dependency resolver for Web API to use.
             var container = builder.Build();
@@ -94,6 +95,14 @@ namespace AutoApi
 
             app.UseAutofacWebApi(config);
             app.UseWebApi(config);
+
+            app.UseStaticFile(new StaticFileMiddlewareOptions
+            {
+                RootDirectory = "../web",
+                DefaultFile = "index.html",
+                EnableETag = true,
+                EnableHtml5LocationMode = true
+            });
         }
     }
 }

@@ -14,7 +14,17 @@ namespace AutoApi.Biz
 
         public async Task<List<TradeRecord>> ListTradeRecord(string coin)
         {
-            return await TradeRecordDao.ListTradeRecord(coin);
+            var tradeRecord = await TradeRecordDao.ListTradeRecord(coin);
+            foreach(var item in tradeRecord)
+            {
+                item.BuyOrderResult = null;
+                item.SellOrderResult = null;
+                item.BuyAnalyze = null;
+                item.SellAnalyze = null;
+                item.BuyOrderQuery = null;
+                item.SellOrderQuery = null;
+            }
+            return tradeRecord;
         }
     }
 }

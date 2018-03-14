@@ -3,3 +3,5 @@
 ################################################################################
 
 /AutoApi/obj/Debug
+/AutoApi/packages
+/AutoApi/bin/Debug

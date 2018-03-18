@@ -12,9 +12,13 @@ namespace AutoApi.Biz
     {
         public SpotRecordDao SpotRecordDao { get; set; }
 
-        public async Task<List<SpotRecord>> ListSpotRecord(string coin)
+        public async Task<List<SpotRecord>> ListSpotRecord(string coin, string order, string username, string fw)
         {
-            var spotRecords = await SpotRecordDao.ListSpotRecord(coin);
+            if (SpotRecordDao == null)
+            {
+                logger.Error("---------------- SpotRecordDao wei null");
+            }
+            var spotRecords = await SpotRecordDao.ListSpotRecord(coin, order, username, fw);
             foreach (var item in spotRecords)
             {
                 item.BuyOrderResult = null;
@@ -25,6 +29,11 @@ namespace AutoApi.Biz
                 item.SellOrderQuery = null;
             }
             return spotRecords;
+        }
+
+        public async Task<List<SpotRecordDTO>> ListSpotRecordDTO()
+        {
+            return await SpotRecordDao.ListSpotRecordDTO();
         }
     }
 }

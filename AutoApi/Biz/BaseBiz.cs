@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace AutoApi.Biz
 {
     public class BaseBiz
     {
+        protected ILog logger = LogManager.GetLogger(typeof(BaseBiz));
     }
 }

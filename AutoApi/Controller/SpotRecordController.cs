@@ -17,17 +17,25 @@ namespace AutoApi.Controller
 
 
         [HttpGet]
-        public async Task<object> CoinBuyList(string coin)
+        [ActionName("list")]
+        public async Task<object> CoinBuyList(string coin, string order, string username, string fw)
         {
             try
             {
-                return await SpotRecordBiz.ListSpotRecord(coin);
+                return await SpotRecordBiz.ListSpotRecord(coin, order, username, fw);
             }
             catch (Exception ex)
             {
                 logger.Error(ex.Message, ex);
                 return null;
             }
+        }
+
+        [HttpGet]
+        [ActionName("listdto")]
+        public async Task<object> ListSpotRecordDTO()
+        {
+            return await SpotRecordBiz.ListSpotRecordDTO();
         }
     }
 }

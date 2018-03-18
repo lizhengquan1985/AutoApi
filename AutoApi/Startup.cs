@@ -45,7 +45,7 @@ namespace AutoApi
 
             config.Routes.MapHttpRoute(
                 "DefaultApi",
-                "api/{controller}/{id}",
+                "api/{controller}/{action}/{id}",
                 new { id = RouteParameter.Optional });
             //config.Routes.MapHttpRoute(
             //    "DefaultActionApi",
@@ -61,10 +61,6 @@ namespace AutoApi
                 .Where(type => (typeof(BaseBiz).IsAssignableFrom(type) || typeof(IBaseDao).IsAssignableFrom(type)))
                 .AsSelf().PropertiesAutowired()
                 .InstancePerRequest();
-
-            builder.Register<SpotRecordBiz>(c => new SpotRecordBiz()).OnActivated(e =>
-            {
-            }).InstancePerRequest();
 
             //注册数据库对象
             builder.Register<IDapperConnection>(ctx => new DapperConnection(new MySqlConnection("server=localhost;port=3306;user id=root; password=lyx123456; database=studyplan; pooling=true; charset=utf8mb4"))).InstancePerRequest();

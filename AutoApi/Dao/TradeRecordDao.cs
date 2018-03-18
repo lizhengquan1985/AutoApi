@@ -12,7 +12,7 @@ namespace AutoApi.Dao
     {
         public async Task<List<TradeRecord>> ListTradeRecord(string coin)
         {
-            var sql = $"select * from t_trade_record where Coin=@coin";
+            var sql = $"select * from t_trade_record where Coin=@coin order by Id desc";
             return (await Database.QueryAsync<TradeRecord>(sql, new { coin })).ToList();
         }
     }

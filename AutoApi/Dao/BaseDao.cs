@@ -1,4 +1,5 @@
-﻿using SharpDapper;
+﻿using log4net;
+using SharpDapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace AutoApi.Dao
 {
     public class BaseDao : IBaseDao
     {
+        protected ILog logger = LogManager.GetLogger(typeof(BaseDao));
+
         public IDapperConnection Database { get; set; }
     }
 }

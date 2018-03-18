@@ -13,9 +13,14 @@ namespace AutoApi.Dao
         public async Task<List<SpotRecord>> ListSpotRecord(string coin, string order, string username, string fw)
         {
             var where = $"where 1=1";
+            var limit = "";
             if (!string.IsNullOrEmpty(coin))
             {
                 where += $" and Coin=@coin";
+            }
+            else
+            {
+                limit += $"limit 0, 200";
             }
             if (!string.IsNullOrEmpty(username))
             {
@@ -33,7 +38,7 @@ namespace AutoApi.Dao
             {
                 order = "Id";
             }
-            var sql = $"select * from t_spot_record {where} order by {order} desc";
+            var sql = $"select * from t_spot_record {where} order by {order} desc {limit}";
             return (await Database.QueryAsync<SpotRecord>(sql, new { coin })).ToList();
         }
 

@@ -18,11 +18,11 @@ namespace AutoApi.Controller
 
         [HttpGet]
         [ActionName("list")]
-        public async Task<object> CoinBuyList(string coin, string order, string username, string fw)
+        public async Task<object> CoinBuyList(string coin, string order, string username, string fw, int count = 500)
         {
             try
             {
-                return await SpotRecordBiz.ListSpotRecord(coin, order, username, fw);
+                return await SpotRecordBiz.ListSpotRecord(coin, order, username, fw, count);
             }
             catch (Exception ex)
             {

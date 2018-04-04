@@ -10,7 +10,7 @@ namespace AutoApi.Dao
 {
     public class SpotRecordDao : BaseDao
     {
-        public async Task<List<SpotRecord>> ListSpotRecord(string coin, string order, string username, string fw)
+        public async Task<List<SpotRecord>> ListSpotRecord(string coin, string order, string username, string fw, int count)
         {
             var where = $"where 1=1";
             var limit = "";
@@ -20,7 +20,7 @@ namespace AutoApi.Dao
             }
             else
             {
-                limit += $"limit 0, 300";
+                limit += $"limit 0, {count}";
             }
             if (!string.IsNullOrEmpty(username))
             {

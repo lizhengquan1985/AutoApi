@@ -33,9 +33,9 @@ namespace AutoApi.Controller
 
         [HttpGet]
         [ActionName("listdto")]
-        public async Task<object> ListSpotRecordDTO()
+        public async Task<object> ListSpotRecordDTO(string username = "lzq")
         {
-            return await SpotRecordBiz.ListSpotRecordDTO();
+            return await SpotRecordBiz.ListSpotRecordDTO(username);
         }
     }
 }

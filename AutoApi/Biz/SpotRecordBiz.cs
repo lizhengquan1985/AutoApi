@@ -31,9 +31,9 @@ namespace AutoApi.Biz
             return spotRecords;
         }
 
-        public async Task<List<SpotRecordDTO>> ListSpotRecordDTO()
+        public async Task<List<SpotRecordDTO>> ListSpotRecordDTO(string username)
         {
-            return await SpotRecordDao.ListSpotRecordDTO();
+            return await SpotRecordDao.ListSpotRecordDTO(username);
         }
     }
 }

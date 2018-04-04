@@ -20,7 +20,7 @@ namespace AutoApi.Dao
             }
             else
             {
-                limit += $"limit 0, 200";
+                limit += $"limit 0, 300";
             }
             if (!string.IsNullOrEmpty(username))
             {
@@ -42,10 +42,10 @@ namespace AutoApi.Dao
             return (await Database.QueryAsync<SpotRecord>(sql, new { coin })).ToList();
         }
 
-        public async Task<List<SpotRecordDTO>> ListSpotRecordDTO()
+        public async Task<List<SpotRecordDTO>> ListSpotRecordDTO(string username)
         {
-            var sql = "select dt '统计日期', sum(buytradeprice * buytotalquantity) '投出金额',count(1) '交易笔数',sum(selltradeprice * selltotalquantity - buytradeprice * buytotalquantity) '收益', sum(selltradeprice * selltotalquantity - buytradeprice * buytotalquantity) / sum(buytradeprice * buytotalquantity) '收益率' from(select *, DATE_FORMAT(selldate, '%m-%d-%Y') dt from t_spot_record where sellsuccess = 1 and username = 'lzq') t group by dt desc;";
-            return (await Database.QueryAsync<SpotRecordDTO>(sql)).ToList();
+            var sql = "select dt '统计日期', sum(buytradeprice * buytotalquantity) '投出金额',count(1) '交易笔数',sum(selltradeprice * selltotalquantity - buytradeprice * buytotalquantity) '收益', sum(selltradeprice * selltotalquantity - buytradeprice * buytotalquantity) / sum(buytradeprice * buytotalquantity) '收益率' from(select *, DATE_FORMAT(selldate, '%m-%d-%Y') dt from t_spot_record where sellsuccess = 1 and username = @username) t group by dt desc;";
+            return (await Database.QueryAsync<SpotRecordDTO>(sql, new { username})).ToList();
         }
 
         /* 2月28日开始总收益 */

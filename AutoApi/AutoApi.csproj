@@ -125,6 +125,7 @@
     <Compile Include="Dao\IBaseDao.cs" />
     <Compile Include="Dao\SpotRecordDao.cs" />
     <Compile Include="Dao\TradeRecordDao.cs" />
+    <Compile Include="DataType\CopyUtils.cs" />
     <Compile Include="DataType\DTO.cs" />
     <Compile Include="DataType\SpotRecord.cs" />
     <Compile Include="DataType\TradeRecord.cs" />

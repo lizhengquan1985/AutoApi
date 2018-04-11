@@ -18,7 +18,7 @@ namespace AutoApi.Controller
 
         [HttpGet]
         [ActionName("list")]
-        public async Task<object> CoinBuyList(string coin, string order, string username, string fw, int count = 500)
+        public async Task<object> CoinBuyList(string coin, string order, string username, string fw, int count = 800)
         {
             try
             {
@@ -35,7 +35,10 @@ namespace AutoApi.Controller
         [ActionName("listdto")]
         public async Task<object> ListSpotRecordDTO(string username = "lzq")
         {
-            return await SpotRecordBiz.ListSpotRecordDTO(username);
+            var list = await SpotRecordBiz.ListSpotRecordDTO(username);
+            var total = (double)0;
+            list.ForEach(it => total += double.Parse(it.收益));
+            return new { data = list, total };
         }
     }
 }

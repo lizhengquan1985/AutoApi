@@ -37,9 +37,10 @@ namespace AutoApi.Dao
             where += $" and not (hassell=1 and selldate<'{DateTime.Now.AddDays(-2)}')";
             if (string.IsNullOrEmpty(order))
             {
-                order = "Id";
+                order = "orderdate";
             }
-            var sql = $"select * from t_spot_record {where} order by {order} desc {limit}";
+            order = "orderdate";
+            var sql = $"select *, case when hassell=1 then selldate else buydate end orderdate from t_spot_record {where} order by {order} desc {limit}";
             return (await Database.QueryAsync<SpotRecord>(sql, new { coin })).ToList();
         }
 

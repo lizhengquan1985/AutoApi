@@ -34,7 +34,7 @@ namespace AutoApi.Dao
             {
                 where += $" and hassell=0";
             }
-            where += $" and not (hassell=1 and selldate<'{DateTime.Now.AddDays(-2)}')";
+            where += $" and not (hassell=1 and selldate<'{DateTime.Now.AddDays(-1)}')";
             if (string.IsNullOrEmpty(order))
             {
                 order = "orderdate";

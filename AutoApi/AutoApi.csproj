@@ -127,8 +127,11 @@
     <Compile Include="Dao\TradeRecordDao.cs" />
     <Compile Include="DataType\CopyUtils.cs" />
     <Compile Include="DataType\DTO.cs" />
+    <Compile Include="DataType\HbData.cs" />
     <Compile Include="DataType\SpotRecord.cs" />
+    <Compile Include="DataType\TradePoint.cs" />
     <Compile Include="DataType\TradeRecord.cs" />
+    <Compile Include="hb\AnaylyzeApi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

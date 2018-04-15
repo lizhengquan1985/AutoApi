@@ -31,5 +31,14 @@ namespace AutoApi.Biz
         {
             return await SpotRecordDao.ListSpotRecordDTO(username);
         }
+
+        public async Task<List<TradePoint>> ListTradePointOfBuy(string username, string coin)
+        {
+            return await SpotRecordDao.ListTradePointOfBuy(username, coin);
+        }
+        public async Task<List<TradePoint>> ListTradePointOfSell(string username, string coin)
+        {
+            return await SpotRecordDao.ListTradePointOfSell(username, coin);
+        }
     }
 }

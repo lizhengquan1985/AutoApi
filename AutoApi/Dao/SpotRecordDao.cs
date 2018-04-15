@@ -57,5 +57,17 @@ namespace AutoApi.Dao
         //select coin, count(1) '交易笔数', sum(buytotalquantity - selltotalquantity) '收益' from t_spot_record where sellsuccess = 1 group by coin;
         //select dt '-----统计日期', sum(buytradeprice * buytotalquantity) '投出金额',count(1) '交易笔数',sum(selltradeprice * selltotalquantity - buytradeprice * buytotalquantity) '收益', sum(selltradeprice * selltotalquantity - buytradeprice * buytotalquantity) / sum(buytradeprice * buytotalquantity) '收益率' from(select *, DATE_FORMAT(selldate, '%m-%d-%Y %H') dt from t_spot_record where sellsuccess = 1) t group by dt desc;
 
+
+
+        public async Task<List<TradePoint>> ListTradePointOfBuy(string username, string coin)
+        {
+            var sql = $"select BuyDate Date, BuyTotalQuantity Quantity, BuyTradePrice Price from t_spot_record where coin=@coin and username=@username and BuyDate>'{DateTime.Now.AddDays(-1.1)}'";
+            return (await Database.QueryAsync<TradePoint>(sql, new { username, coin })).ToList();
+        }
+        public async Task<List<TradePoint>> ListTradePointOfSell(string username, string coin)
+        {
+            var sql = $"select SellDate Date, SellTotalQuantity Quantity, SellTradePrice Price from t_spot_record where coin=@coin and username=@username and SellDate>'{DateTime.Now.AddDays(-1.1)}' ";
+            return (await Database.QueryAsync<TradePoint>(sql, new { username, coin })).ToList();
+        }
     }
 }
